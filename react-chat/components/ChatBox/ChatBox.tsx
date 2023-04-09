@@ -2,7 +2,6 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 
 function ChatBox() {
   const [messages, setMessages] = useState<string[]>([]);
-
   const [inputValue, setInputValue] = useState<string>('');
 
   const onChangeMessage = (event: ChangeEvent<HTMLInputElement>) => {
