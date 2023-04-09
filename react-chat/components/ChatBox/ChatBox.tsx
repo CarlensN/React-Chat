@@ -1,19 +1,18 @@
-import { ChangeEvent, FormEvent } from 'react';
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
-const ChatBox = () => {
+function ChatBox() {
   const [messages, setMessages] = useState<string[]>([]);
 
-  const [message, setMessage] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>('');
 
   const onChangeMessage = (event: ChangeEvent<HTMLInputElement>) => {
-    setMessage(event.target.value);
+    setInputValue(event.target.value);
   };
 
-  const send = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
-    setMessages([...messages, message]);
-    setMessage('');
+    setMessages([...messages, inputValue]);
+    setInputValue('');
   };
 
   return (
@@ -21,19 +20,19 @@ const ChatBox = () => {
       {messages.map((message) => (
         <div>{message}</div>
       ))}
-      <form onSubmit={send}>
+      <form onSubmit={onSubmitHandler}>
         <input
           type="text"
           placeholder="Enter your message here"
           onChange={onChangeMessage}
-          value={message}
-        ></input>
+          value={inputValue}
+        />
         <button type="submit">
           Submit
         </button>
       </form>
     </div>
   );
-};
+}
 
 export default ChatBox;
